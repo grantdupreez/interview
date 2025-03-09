@@ -141,15 +141,15 @@ def contextualized_question(input: dict):
 
 st.title('🤖 RAG OpenAI Chatbot')
 
-#openai_api_key = st.secrets.get('OPENAI_API_KEY')
-if not API_KEY:
-    API_KEY = st.text_input('Enter OpenAI API token:', type='password')
-    if not (API_KEY.startswith('sk-') and len(API_KEY) == 51):
-        st.warning('Please enter your credentials!')
-        st.stop()
-    st.secrets['OPENAI_API_KEY'] = API_KEY
-else:
-    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+#openai_api_key = st.secrets["auth_key"]
+#if not API_KEY:
+#    API_KEY = st.text_input('Enter OpenAI API token:', type='password')
+#    if not (API_KEY.startswith('sk-') and len(API_KEY) == 51):
+#        st.warning('Please enter your credentials!')
+#        st.stop()
+#    st.secrets["auth_key"] = API_KEY
+#else:
+#    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
