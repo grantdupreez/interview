@@ -60,7 +60,7 @@ if not check_password():
 
 conversation_placeholder = st.empty()
 
-API_KEY = st.secrets.["auth_key"])
+API_KEY = st.secrets.["auth_key"]
 
 def clear_chat():
     chat_history.clear()
