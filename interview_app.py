@@ -19,9 +19,9 @@ load_dotenv()
 
 
 # Your API keys and URLs (replace with your actual keys)
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+OPENAI_API_KEY = st.secrets['auth_key']
+QDRANT_URL = st.secrets['QDRANT_URL']
+QDRANT_API_KEY = st.secrets['QDRANT_API_KEY']
 
 
 # Initialize session state variables
