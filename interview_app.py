@@ -156,7 +156,7 @@ if 'loaded_documents' not in st.session_state:
     loaded_documents = load_documents_from_directory(data_directory)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
     texts = text_splitter.split_documents(loaded_documents)
-    embeddings = OpenAIEmbeddings(openai_api_key)
+#    embeddings = OpenAIEmbeddings(openai_api_key)
     embeddings = OpenAIEmbeddings(model='text-embedding-3-large')
 
     persist_directory = 'chroma'
