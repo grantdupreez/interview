@@ -141,15 +141,7 @@ def contextualized_question(input: dict):
 
 st.title('🤖 RAG OpenAI Chatbot')
 
-#openai_api_key = st.secrets["auth_key"]
-#if not API_KEY:
-#    API_KEY = st.text_input('Enter OpenAI API token:', type='password')
-#    if not (API_KEY.startswith('sk-') and len(API_KEY) == 51):
-#        st.warning('Please enter your credentials!')
-#        st.stop()
-#    st.secrets["auth_key"] = API_KEY
-#else:
-#    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai_api_key = st.secrets["auth_key"]
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -164,9 +156,7 @@ if 'loaded_documents' not in st.session_state:
     loaded_documents = load_documents_from_directory(data_directory)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
     texts = text_splitter.split_documents(loaded_documents)
-    embeddings = OpenAIEmbeddings(
-        api_key=st.secrets["auth_key"],
-    )
+    embeddings = OpenAIEmbeddings(openai_api_key)
     embeddings = OpenAIEmbeddings(model='text-embedding-3-large')
 
     persist_directory = 'chroma'
