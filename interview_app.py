@@ -145,9 +145,9 @@ def process_audio_input():
     # Generate a unique key for this recording session based on the recording key in session state
     unique_key = f"STT-{st.session_state['recording_key']}"
 
-    # Capture audio input from the mic and convert it to text (using Urdu as the language)
+    # Capture audio input from the mic and convert it to text (using EN as the language)
     transcribed_text = speech_to_text(
-        language='ur',               # Set language to Urdu for speech recognition
+        language='en',              
         # Ensure the widget adapts to the container width in the UI
         use_container_width=True,
         just_once=True,              # Capture audio only once for simplicity
@@ -159,8 +159,8 @@ def process_audio_input():
 
 
 # Converts text to speech in the specified language using gTTS and returns the audio data.
-def text_to_speech(text, lang='ur'):
-    """Convert the assistant's response to audio in Urdu using gTTS."""
+def text_to_speech(text, lang='en'):
+    """Convert the assistant's response to audio using gTTS."""
 
     # Initialize gTTS with the given text and language
     tts = gTTS(text=text, lang=lang, tld='com.au')
@@ -187,8 +187,6 @@ def qa_ret(qdrant_store, input_query):
         You are a helpful and dedicated female assistant. Your primary role is to assist the user by providing accurate
         and thoughtful answers based on the given context. If the user asks any questions related to the provided
         information, respond in a courteous and professional manner.
-        **Note:** Always provide your responses in Roman Urdu (Hinglish) to maintain the preferred language format.
-        {context}
         **Question:** {question}
         """
         # Create a chat prompt template based on the defined template
@@ -286,16 +284,16 @@ def main():
 
     # Subheader
     st.subheader(
-        "Upload a document, ask questions, and get responses in both text and audio form in Urdu.")
-    st.write("This app allows you to interact with documents in Urdu. It uses advanced NLP to process documents, allowing you to ask questions and get detailed answers in Urdu, both in text and audio format.")
+        "Upload a document, ask questions, and get responses in both text and audio form.")
+    st.write("This app allows you to interact with documents. It uses advanced NLP to process documents, allowing you to ask questions and get detailed answers, both in text and audio format.")
 
     # Sidebar instructions and about section
     st.sidebar.title("Instructions")
     st.sidebar.markdown("""
     **How to Use:**
      1. Upload a PDF or document file using the upload button below.
-    2. Once processed, ask your question in Urdu by typing or using voice input.
-    3. Get responses in text and audio form (in Urdu).
+    2. Once processed, ask your question by typing or using voice input.
+    3. Get responses in text and audio form.
     4. You can ask multiple questions sequentially, and your previous responses will remain visible.
     
     **Notes:**
@@ -322,7 +320,7 @@ def main():
         # Step 3: Show the audio input if the document is stored in vector DB
         if st.session_state["data_stored"]:
             # Record audio input
-            st.write("Ask Your Question in Urdu")
+            st.write("Ask Your Question")
             audio_input = process_audio_input()
 
             if audio_input:
@@ -335,8 +333,8 @@ def main():
                 # Generate response from AI model
                 bot_response = qa_ret(qdrant_store, audio_input)
 
-                # Convert bot's response to audio (in Urdu)
-                audio_response = text_to_speech(bot_response, lang='ur')
+                # Convert bot's response to audio 
+                audio_response = text_to_speech(bot_response, lang='en')
 
                 # Append to chat history with file metadata
                 st.session_state["chat_history"].append({
